@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border="2">
+    <thead>
+     <tr>
+     <th>#</th>
+     <th>Mã nhân viên</th>
+     <th>Tên nhân viên</th>
+     <th>Giới tính </th>
+     <th>Số điện thoại</th>
+     <th>Mã chức vụ</th>
+     <th>Tên chức vụ</th>
+     </tr>
+    </thead>
+
+    <tbody>
+    <th:block th:each="listNV : ${page.getContent()}">
+        <tr>
+            <td th:text="${listNV.id}"></td>
+            <td th:text="${listNV.maNhanVien}"></td>
+            <td th:text="${listNV.hoTen}"></td>
+            <td th:text="${listNV.gioiTinh ? 'Nam' : 'Nữ'}"></td>
+            <td th:text="${listNV.soDienThoai}"></td>
+            <td th:text="${listNV.chucVu.maChucVu}"></td>
+            <td th:text="${listNV.chucVu.tenChucVu}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<a th:href="@{|/nhan-vien/phan-trang?page=${page.isFirst ? 0 : page.getNumber - 1 }|}">prev</a>
+<a th:href="@{|/nhan-vien/phan-trang?page=${page.isLast ? page.getNumber : page.getNumber +1 }|}">next</a>
+</body>
+</html>

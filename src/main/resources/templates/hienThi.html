@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Them
+<form action="/nhan-vien/add" method="post" th:object="${nhanVien}">
+Mã chức vụ <input type="text" th:field="*{maNhanVien}"> <span style="color:red;" th:errors="*{maNhanVien}"></span> <br>
+Họ và tên <input type="text" th:field="*{hoTen}"><span style="color:red;" th:errors="*{hoTen}"></span><br>
+Số điện thoại <input type="text" th:field="*{soDienThoai}"><span style="color:red;" th:errors="*{soDienThoai}"></span><br>
+Giới tính:<br>
+  Nam:  <input type="radio" value="true" th:field="*{gioiTinh}">
+Nữ<input type="radio" value="false" th:field="*{gioiTinh}"><span style="color:red;" th:errors="*{gioiTinh}"></span>
+    <br>
+    <select name="chucVu">
+        <option th:each=" listCV: ${listCV}" th:value="${listCV.id}" th:text="${listCV.tenChucVu}"></option>
+    </select> <br>
+
+    <button type="submit">submit</button>
+</form>
+
+<table border="2">
+    <thead>
+     <tr>
+     <th>#</th>
+     <th>Mã nhân viên</th>
+     <th>Tên nhân viên</th>
+     <th>Giới tính </th>
+     <th>Số điện thoại</th>
+     <th>Mã chức vụ</th>
+     <th>Tên chức vụ</th>
+     <th>Action</th>
+     </tr>
+    </thead>
+
+    <tbody>
+    <th:block th:each="listNV: ${ListNV}">
+        <tr>
+            <td th:text="${listNV.id}"></td>
+            <td th:text="${listNV.maNhanVien}"></td>
+            <td th:text="${listNV.hoTen}"></td>
+            <td th:text="${listNV.gioiTinh ? 'Nam' : 'Nữ'}"></td>
+            <td th:text="${listNV.soDienThoai}"></td>
+            <td th:text="${listNV.chucVu.maChucVu}"></td>
+            <td th:text="${listNV.chucVu.tenChucVu}"></td>
+            <td><a th:href="@{|/nhan-vien/delete?id=${listNV.id}|}">Delete</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</body>
+</html>
